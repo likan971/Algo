@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Algo
@@ -47,6 +45,7 @@ namespace Algo
             System.Console.Write("NULL");
             System.Console.WriteLine();
         }
+
 
         #region Reverse Singly Linked List Test
         public void ReverseListTest()
