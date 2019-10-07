@@ -13,7 +13,7 @@ namespace Algo
     {
         private readonly LinkedList list = new LinkedList();
 
-        private ListNode CreateLinkedList(int nodeCount, bool cycled = false)
+        public ListNode CreateLinkedList(int nodeCount, bool cycled = false)
         {
             if (nodeCount <= 0)
             {
@@ -35,7 +35,7 @@ namespace Algo
             return head;
         }
 
-        private void PrintLinkedList(ListNode head)
+        public void PrintLinkedList(ListNode head)
         {
             while (head != null)
             {

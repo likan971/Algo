@@ -8,8 +8,8 @@ namespace Algo
     {
         static void Main(string[] args)
         {
-            var test = new QuickSortExTest();
-            test.TestKthLargestElement();
+            LeetCodeTest test = new LeetCodeTest();
+            test.TestLongestPalindrome();
         }
 
         // Get memoery address of an int variable
