@@ -2,113 +2,72 @@ using System.Collections.Generic;
 
 namespace Algo
 {
-    public class ListNode
-    {
-      public int val;
-      public ListNode next;
-      public ListNode(int x) { val = x; }
-    }
-
     public class LinkedListTest
     {
         private readonly LinkedList list = new LinkedList();
 
-        public ListNode CreateLinkedList(int nodeCount, bool cycled = false)
-        {
-            if (nodeCount <= 0)
-            {
-                return null;
-            }
-
-            var head = new ListNode(1);
-            var last = head;
-            for (int i = 1; i < nodeCount; i ++)
-            {
-                var node = new ListNode(i+1);
-                last.next = node;
-                last = node;
-            }
-            if (cycled)
-            {
-                last.next = head;
-            }
-            return head;
-        }
-
-        public void PrintLinkedList(ListNode head)
-        {
-            while (head != null)
-            {
-                System.Console.Write($"{head.val} --> ");
-                head = head.next;
-            }
-            System.Console.Write("NULL");
-            System.Console.WriteLine();
-        }
-
-
         #region Reverse Singly Linked List Test
         public void ReverseListTest()
         {
-            var list1 = CreateLinkedList(1);
-            var list2 = CreateLinkedList(2);
-            var list3 = CreateLinkedList(3);
-            var list4 = CreateLinkedList(4);
-            var list5 = CreateLinkedList(5);
-            var list6 = CreateLinkedList(6);
-            PrintLinkedList(list.ReverseList(list1));
-            PrintLinkedList(list.ReverseList(list2));
-            PrintLinkedList(list.ReverseList(list3));
-            PrintLinkedList(list.ReverseList(list4));
-            PrintLinkedList(list.ReverseList(list5));
-            PrintLinkedList(list.ReverseList(list6));
+            var list1 = Utils.CreateLinkedList(1);
+            var list2 = Utils.CreateLinkedList(2);
+            var list3 = Utils.CreateLinkedList(3);
+            var list4 = Utils.CreateLinkedList(4);
+            var list5 = Utils.CreateLinkedList(5);
+            var list6 = Utils.CreateLinkedList(6);
+            Utils.PrintLinkedList(list.ReverseList(list1));
+            Utils.PrintLinkedList(list.ReverseList(list2));
+            Utils.PrintLinkedList(list.ReverseList(list3));
+            Utils.PrintLinkedList(list.ReverseList(list4));
+            Utils.PrintLinkedList(list.ReverseList(list5));
+            Utils.PrintLinkedList(list.ReverseList(list6));
         }
 
         public void ReverseListExTest()
         {
-            var list1 = CreateLinkedList(1);
-            var list2 = CreateLinkedList(2);
-            var list3 = CreateLinkedList(3);
-            var list4 = CreateLinkedList(4);
-            var list5 = CreateLinkedList(5);
-            var list6 = CreateLinkedList(6);
-            PrintLinkedList(list.ReverseListEx(list1));
-            PrintLinkedList(list.ReverseListEx(list2));
-            PrintLinkedList(list.ReverseListEx(list3));
-            PrintLinkedList(list.ReverseListEx(list4));
-            PrintLinkedList(list.ReverseListEx(list5));
-            PrintLinkedList(list.ReverseListEx(list6));
+            var list1 = Utils.CreateLinkedList(1);
+            var list2 = Utils.CreateLinkedList(2);
+            var list3 = Utils.CreateLinkedList(3);
+            var list4 = Utils.CreateLinkedList(4);
+            var list5 = Utils.CreateLinkedList(5);
+            var list6 = Utils.CreateLinkedList(6);
+            Utils.PrintLinkedList(list.ReverseListEx(list1));
+            Utils.PrintLinkedList(list.ReverseListEx(list2));
+            Utils.PrintLinkedList(list.ReverseListEx(list3));
+            Utils.PrintLinkedList(list.ReverseListEx(list4));
+            Utils.PrintLinkedList(list.ReverseListEx(list5));
+            Utils.PrintLinkedList(list.ReverseListEx(list6));
         }
 
         public void ReverseListReTest()
         {
-            var list1 = CreateLinkedList(1);
-            var list2 = CreateLinkedList(2);
-            var list3 = CreateLinkedList(3);
-            var list4 = CreateLinkedList(4);
-            var list5 = CreateLinkedList(5);
-            var list6 = CreateLinkedList(6);
-            PrintLinkedList(list.ReverseListRe(list1));
-            PrintLinkedList(list.ReverseListRe(list2));
-            PrintLinkedList(list.ReverseListRe(list3));
-            PrintLinkedList(list.ReverseListRe(list4));
-            PrintLinkedList(list.ReverseListRe(list5));
-            PrintLinkedList(list.ReverseListRe(list6));
+            var list1 = Utils.CreateLinkedList(1);
+            var list2 = Utils.CreateLinkedList(2);
+            var list3 = Utils.CreateLinkedList(3);
+            var list4 = Utils.CreateLinkedList(4);
+            var list5 = Utils.CreateLinkedList(5);
+            var list6 = Utils.CreateLinkedList(6);
+            Utils.PrintLinkedList(list.ReverseListRe(list1));
+            Utils.PrintLinkedList(list.ReverseListRe(list2));
+            Utils.PrintLinkedList(list.ReverseListRe(list3));
+            Utils.PrintLinkedList(list.ReverseListRe(list4));
+            Utils.PrintLinkedList(list.ReverseListRe(list5));
+            Utils.PrintLinkedList(list.ReverseListRe(list6));
         }
         #endregion
 
         public void CycledLinkedListTest()
         {
-            var isCycled = list.CycledLinkedList(CreateLinkedList(3, true));
+            var isCycled = list.CycledLinkedList(Utils.CreateLinkedList(3, true));
             System.Console.WriteLine(isCycled);
         }
 
         public void MergeTwoListsTest()
         {
-            var l1 = CreateLinkedList(5);
-            var l2 = CreateLinkedList(3);
+            var l1 = Utils.CreateLinkedList(5);
+            var l2 = Utils.CreateLinkedList(3);
             var result = list.MergeTwoLists(l1, l2);
-            PrintLinkedList(result);
+            Utils.PrintLinkedList(result);
         }
     }
 

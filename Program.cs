@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Cryptography;
 
 namespace Algo
 {
@@ -8,8 +8,11 @@ namespace Algo
     {
         static void Main(string[] args)
         {
-            LeetCodeTest test = new LeetCodeTest();
-            test.TestLongestPalindrome();
+            // LeetCodeTest test = new LeetCodeTest();
+            // test.TestFindMedianSortedArrays();
+
+            RecursionTest rt = new RecursionTest();
+            rt.TestCountSmaller();
         }
 
         // Get memoery address of an int variable
@@ -22,12 +25,5 @@ namespace Algo
                 return addr.ToString("x");
             }
         }
-    }
-
-    public class Model
-    {
-        public int Key { get; set; }
-
-        public string Value { get; set; }
     }
 }
