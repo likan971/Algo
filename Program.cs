@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using System.Linq;
 
 namespace Algo
 {
@@ -11,8 +11,11 @@ namespace Algo
             // LeetCodeTest test = new LeetCodeTest();
             // test.TestFindMedianSortedArrays();
 
-            RecursionTest rt = new RecursionTest();
-            rt.TestCountSmaller();
+            // RecursionTest rt = new RecursionTest();
+            // rt.TestCountSmaller();
+
+            DynamicTest dt = new DynamicTest();
+            dt.TestKnapsack();
         }
 
         // Get memoery address of an int variable
@@ -24,6 +27,13 @@ namespace Algo
                 IntPtr addr = (IntPtr)ptr;
                 return addr.ToString("x");
             }
+        }
+
+        static IEnumerable<int> GenerateWithYield()
+        { 
+            var i = 0;
+            while (i<5)
+                yield return ++i; 
         }
     }
 }
