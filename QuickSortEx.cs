@@ -46,7 +46,7 @@ namespace Algo
         }
 
         ///<summary>
-        /// 找到数字的第k大元素（用快速排序思想）
+        /// 找到无序数组的第k大元素（用快速排序思想）
         ///</summary>
         public int KthLargestElement(int[] array, int k)
         {
