@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Algo
@@ -7,6 +9,24 @@ namespace Algo
     public class LeetCodeTest
     {
         public LeetCode leetCode = new LeetCode();
+
+        public void TestTwoSumEx()
+        {
+            var result = leetCode.TwoSumEx(new int[] {-1, -4, 0, -5, -2, -2, -3}, -5);
+            foreach (var r in result)
+            {
+                Console.WriteLine($"{r[0]}, {r[1]}");
+            }
+        }
+
+        public void TestThreeSum()
+        {
+            var result = leetCode.ThreeSum(new int[] { -1, 0, 1, 2, -1, -4 });
+            foreach (var r in result)
+            {
+                Console.WriteLine($"{r[0]}, {r[1]}, {r[2]}");
+            }
+        }
 
         public void TestAddTwoNumbers()
         {
@@ -47,6 +67,34 @@ namespace Algo
 
     public class LeetCode
     {
+        /// <summary>
+        /// 1. Two Sum for 3Sum
+        /// Instead of returing indices of one result elements, this method returns multiple result elements themselves
+        /// </summary>
+        public IList<List<int>> TwoSumEx(int[] nums, int target, int excludeIndex = - 1)
+        {
+            var result = new List<List<int>>();
+            var hashTable = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i ++)
+            {
+                if (excludeIndex >= 0 && i == excludeIndex)
+                {
+                    continue;
+                }
+                var num1 = nums[i];
+                var num2 = target - num1;
+                if (hashTable.ContainsKey(num2))
+                {
+                    result.Add(num1 < num2 ? new List<int> { num1, num2 } : new List<int> { num2, num1 });
+                }
+                else if (!hashTable.ContainsKey(num1))
+                {
+                    hashTable.Add(num1, i);
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// 2. Add Two Numbers
         /// </summary>
@@ -197,6 +245,48 @@ namespace Algo
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// 15. 3Sum
+        /// </summary>
+        public IList<IList<int>> ThreeSum(int[] nums)
+        {
+            var result = new Dictionary<string, IList<int>>();
+            var hashTable = new Dictionary<int, int>();
+
+            if (nums.Length < 3)
+            {
+                return result.Values.ToList();
+            }
+            for (int i = 0; i < nums.Length; i ++)
+            {
+                if (hashTable.ContainsKey(nums[i]))
+                {
+                    continue;
+                }
+                var twoSum = TwoSumEx(nums, nums[i] * -1, i);
+                hashTable.Add(nums[i], i);
+
+                foreach (var twoSumItem in twoSum)
+                {
+                    if (nums[i] < twoSumItem[0])
+                    {
+                        twoSumItem.Insert(0, nums[i]);
+                    }
+                    else if (nums[i] > twoSumItem[1])
+                    {
+                        twoSumItem.Add(nums[i]);
+                    }
+                    else
+                    {
+                        twoSumItem.Insert(1, nums[i]);
+                    }
+                    result.TryAdd($"{twoSumItem[0]}{twoSumItem[1]}{twoSumItem[2]}", twoSumItem);
+                }
+            }
+
+            return result.Values.ToList();
         }
 
         /// <summary>
