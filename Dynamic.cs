@@ -13,7 +13,7 @@ namespace Algo
             var itemsNumber = itemsWeight.Length;
             var maxWeight = 9;
 
-            Console.WriteLine(dp.Knapsack(itemsWeight, itemsValue, itemsNumber, maxWeight));
+            Console.WriteLine("最大价值：" + dp.Knapsack(itemsWeight, itemsValue, itemsNumber, maxWeight));
         }
     }
 
@@ -53,7 +53,7 @@ namespace Algo
                 {
                     if (states[i-1][j] >= 0) 
                     {
-                        states[i][j] = states[i-1][j]; // 重量状态跟上个物品一样
+                        states[i][j] = states[i-1][j]; // 价值状态跟上个物品一样
                     }
                 }
                 // 选择第 i 个物品
@@ -71,15 +71,63 @@ namespace Algo
             }
             // 找出最大值
             int maxvalue = -1;
+            int maxvalueIndex = 0;
             for (int j = 0; j <= w; ++j)
             {
                 if (states[n-1][j] > maxvalue)
                 {
                     maxvalue = states[n-1][j];
+                    maxvalueIndex = j;
                 }
             }
+            // 找出选择了哪些物品
+            for (int i = n - 1; i >= 0; i--)
+            {
+                if (i == 0 && states[i][maxvalueIndex] > 0)
+                {
+                    Console.Write("第0 ");
+                }
+                if (maxvalueIndex-weight[i] >= 0 && states[i-1][maxvalueIndex-weight[i]] > -1 && states[i][maxvalueIndex] > states[i-1][maxvalueIndex]) // 选第i个物品
+                {
+                    Console.Write($"第{i} ");
+                    maxvalueIndex = maxvalueIndex-weight[i];
+                }
+            }
+
             return maxvalue;
         }
 
+        /// <summary>
+        /// Leetcode 300 最长上升子序列长度
+        /// </summary>
+        public int LengthOfLIS(int[] nums)
+        {
+            var numsLength = nums.Length;
+            if (numsLength == 0 || numsLength == 1)
+            {
+                return numsLength;
+            }
+            var state = new int[numsLength];
+            var maxLength = 1;
+
+            for (int i = 0; i < numsLength; i ++)
+            {
+                var currentLength = 1;
+                for (int j = i - 1; j >= 0; j --)
+                {
+                    if (nums[j] < nums[i] && state[j] + 1 > currentLength)
+                    {
+                        currentLength = state[j] + 1;
+                    }
+                }
+                state[i] = currentLength;
+                if (currentLength > maxLength)
+                {
+                    maxLength = currentLength;
+                }
+            }
+
+            return maxLength;
+        }
     }
 }

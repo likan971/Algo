@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Algo
@@ -14,8 +15,8 @@ namespace Algo
             // RecursionTest rt = new RecursionTest();
             // rt.TestCountSmaller();
 
-            DynamicTest dt = new DynamicTest();
-            dt.TestKnapsack();
+            // DynamicTest dt = new DynamicTest();
+            // dt.TestKnapsack();
         }
 
         // Get memoery address of an int variable
@@ -35,5 +36,11 @@ namespace Algo
             while (i<5)
                 yield return ++i; 
         }
+    }
+
+    public enum Types
+    {
+        One = 1,
+        Two = 2
     }
 }
