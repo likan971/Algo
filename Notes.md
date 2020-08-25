@@ -212,3 +212,35 @@
         return head;
     }
     ```
+
+    ```
+    public int pathSum = int.MinValue;
+    public int MaxPathSum(TreeNode root)
+    {
+        RootSumTraversal(root);
+        return pathSum;
+    }
+    public int RootSumTraversal(TreeNode node)
+    {
+        if (node == null) return 0;
+        var leftSum = RootSumTraversal(node.left);
+        var rightSum = RootSumTraversal(node.right);
+        var rootSum = node.val;
+
+        if (node.left != null)
+        {
+            if (leftSum > pathSum) pathSum = node.left.val;
+            if (leftSum + node.val > pathSum) pathSum = leftSum + node.val;
+            if (leftSum + node.val > rootSum) rootSum = leftSum + node.val;
+        }
+        if (node.right != null)
+        {
+            if (rightSum > pathSum) pathSum = node.right.val;
+            if (rightSum + node.val > pathSum) pathSum = rightSum + node.val;
+            if (rightSum + node.val > rootSum) rootSum = rightSum + node.val;
+        }
+        if (leftSum + rightSum + node.val > pathSum) pathSum = leftSum + rightSum + node.val;
+        if (node.val > pathSum) pathSum = node.val;
+        return rootSum;
+    }
+    ```
