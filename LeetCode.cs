@@ -63,6 +63,17 @@ namespace Algo
             var result = leetCode.LevelOrder(root);
             Utils.Print2dArray(result as int[][]);
         }
+
+        public void TestSqrt()
+        {
+            var result = leetCode.MySqrt(2147483647);
+            System.Console.WriteLine(result);
+        }
+
+        public void TestReverseString()
+        {
+
+        }
     }
 
     public class LeetCode
@@ -348,6 +359,80 @@ namespace Algo
         }
 
         /// <summary>
+        /// 41. First Missing Positive
+        /// </summary>
+        public int FirstMissingPositive(int[] nums)
+        {
+            var hashTable = new Dictionary<int, int>();
+            var n = 1;
+            for (int i = 0; i < nums.Length; i ++)
+            {
+                if (nums[i] > 0 && nums[i] <= nums.Length + 1)
+                {
+                    hashTable.TryAdd(nums[i], i);
+                }
+            }
+            for (; n <= nums.Length; n ++)
+            {
+                if (!hashTable.ContainsKey(n))
+                {
+                    return n;
+                }
+            }
+            return n;
+        }
+
+        /// <summary>
+        /// 69. Sqrt(x)  二分查找法
+        /// </summary>
+        public int MySqrt(int x)
+        {
+            if (x == 0) return 0;
+            if (x <= 3) return 1;
+            int low = 2;
+            int high = x / 2;
+            int mid = (low + high) / 2;
+            while (true)
+            {
+                long target = (long)mid * mid;
+                if (target == x || low == mid || mid == high)
+                {
+                    return mid;
+                }
+                else if (target > x)
+                {
+                    high = mid;
+                    mid = (low + high) / 2;
+                }
+                else
+                {
+                    low = mid;
+                    mid = (low + high) / 2;
+                }
+            }
+        }
+
+        private Dictionary<int, int> dic = new Dictionary<int, int>
+        {
+            [1] = 1,
+            [2] = 2
+        };
+        /// <summary>
+        /// 70. Climbing Stairs
+        /// </summary>
+        public int ClimbStairs(int n)
+        {
+            if (dic.ContainsKey(n))
+            {
+                return dic[n];
+            }
+
+            var result = ClimbStairs(n - 1) + ClimbStairs(n - 2);
+            dic.Add(n, result);
+            return result;
+        }
+
+        /// <summary>
         /// 102. Binary Tree Level Order Traversal
         /// </summary>
         public IList<IList<int>> LevelOrder(TreeNode root)
@@ -390,6 +475,54 @@ namespace Algo
             }
 
             return result.ToArray();
+        }
+
+        /// <summary>
+        /// 169. Majority Element
+        /// </summary>
+        public int MajorityElement(int[] nums)
+        {
+            var hashTable = new Dictionary<int, int>();
+            var maxCount = 0;
+            var maxNum = 0;
+            for (int i = 0; i < nums.Length; i ++)
+            {
+                var newCount = 1;
+                if (hashTable.ContainsKey(nums[i]))
+                {
+                    newCount = hashTable[nums[i]] + 1;
+                    hashTable[nums[i]] = newCount;
+                }
+                else
+                {
+                    hashTable.Add(nums[i], 1);
+                }
+                if (newCount > maxCount)
+                {
+                    maxCount = newCount;
+                    maxNum = nums[i];
+                }
+            }
+
+            return maxNum;
+        }
+
+        /// <summary>
+        /// 344. Reverse String
+        /// </summary>
+        public char[] ReverseString(char[] s)
+        {
+            int i = 0;
+            int j = s.Length - 1;
+            while (i < j)
+            {
+                var temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+                i ++;
+                j --;
+            }
+            return s;
         }
     }
 }
